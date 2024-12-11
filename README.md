@@ -1,12 +1,18 @@
-# Pacific Retail Data Transformation Project
-# Snowflake Data Warehousing & Engineering project 
-## Project Overview
-This project demonstrates a comprehensive ETL pipeline using **Snowflake** to transform raw data into a structured and validated format for downstream analytics. The pipeline follows a multi-layer architecture with **Bronze**, **Silver**, and **Gold** layers for better data governance and business insights.
+# Pacific Retail Data Transformations
+
+## Overview
+This project demonstrates a comprehensive ETL pipeline using **Snowflake** to transform raw data into a structured and validated format for downstream analytics. The pipeline follows a multi-layer architecture with **Bronze**, **Silver**, **Gold** layers for better data governance and business insights.
 
 The project includes:
 1. **Data Loading**: Loading CSV files (`customers`, `orders`, `products`) into the **Bronze** layer.
 2. **Data Transformation**: Applying business rules to clean and validate the data in the **Silver** layer.
 3. **Business Logic**: Ensuring data quality and enriching the dataset for business use cases.
+
+## Data Sources
+### Raw Data
+- `customers.csv`
+- `orders.csv`
+- `products.csv`
 
 Raw layer creation:
 
