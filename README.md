@@ -3,8 +3,12 @@ Data Engineering project using Snowflake data warehouse
 
 Raw layer creation:
 
-![image](https://github.com/user-attachments/assets/1aeb88f8-201f-460b-95d7-13a61edc9d72)
+![image](https://github.com/user-attachments/assets/394292c0-f211-4317-8875-9a79bf0ccb8d)
 
 Silver layer table creation:
 
-![image](https://github.com/user-attachments/assets/1c017a52-3540-4d08-8b9c-8a407eec8035)
+![image](https://github.com/user-attachments/assets/4d0eac12-822b-4815-93db-06a369b61f58)
+
+## Data cleaning and standardization using Snowflake SQL Script ##
+
+![image](https://github.com/user-attachments/assets/9c55f3bd-a022-4264-b915-79bac2f0c9a2)
