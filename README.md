@@ -29,6 +29,54 @@ Silver layer table creation:
 - **Gender Standardization**: Classify gender as `Male`, `Female`, or `Other`.
 - **Total Purchases Validation**: Ensure `total_purchases` is numeric; default invalid values to `0`.
 
+#### SQL Query:
+```sql
+CREATE OR REPLACE TABLE silver.customers AS
+SELECT 
+    customer_id,
+    CASE WHEN email IS NOT NULL THEN email ELSE 'invalid@example.com' END AS validated_email,
+    CASE 
+        WHEN LOWER(customer_type) IN ('regular', 'premium') THEN INITCAP(customer_type)
+        ELSE 'Unknown'
+    END AS standardized_customer_type,
+    CASE 
+        WHEN age BETWEEN 18 AND 120 THEN age ELSE NULL
+    END AS verified_age,
+    CASE 
+        WHEN LOWER(gender) IN ('male', 'female') THEN INITCAP(gender)
+        ELSE 'Other'
+    END AS standardized_gender,
+    CASE 
+        WHEN TRY_CAST(total_purchases AS NUMBER) IS NOT NULL THEN total_purchases
+        ELSE 0
+    END AS validated_total_purchases
+FROM 
+    bronze.raw_customers;
+
+#### SQL Query:
+```sql
+CREATE OR REPLACE TABLE silver.customers AS
+SELECT 
+    customer_id,
+    CASE WHEN email IS NOT NULL THEN email ELSE 'invalid@example.com' END AS validated_email,
+    CASE 
+        WHEN LOWER(customer_type) IN ('regular', 'premium') THEN INITCAP(customer_type)
+        ELSE 'Unknown'
+    END AS standardized_customer_type,
+    CASE 
+        WHEN age BETWEEN 18 AND 120 THEN age ELSE NULL
+    END AS verified_age,
+    CASE 
+        WHEN LOWER(gender) IN ('male', 'female') THEN INITCAP(gender)
+        ELSE 'Other'
+    END AS standardized_gender,
+    CASE 
+        WHEN TRY_CAST(total_purchases AS NUMBER) IS NOT NULL THEN total_purchases
+        ELSE 0
+    END AS validated_total_purchases
+FROM 
+    bronze.raw_customers;
+
 #### Data before & after transformations
 
 ![image](https://github.com/user-attachments/assets/f7420be1-2b17-48bf-a6be-827e2334c07c)
