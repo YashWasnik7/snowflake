@@ -1,5 +1,4 @@
-# snowflake
-Data Engineering project using Snowflake data warehouse
+# Snowflake Data Warehousing & Engineering project 
 
 Raw layer creation:
 
