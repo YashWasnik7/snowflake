@@ -70,6 +70,8 @@ FROM
 ### Aggregated Query for Gold Layer
 The query aggregates data to analyze daily sales, providing metrics such as total quantity sold, total sales, average price per unit, and average transaction value. Below is the query for the view:
 
+## Analysis
+### 1. Daily Sales Analysis
 #### `VW_DAILY_SALES_ANALYSIS`
 ```sql
 CREATE OR REPLACE VIEW VW_DAILY_SALES_ANALYSIS AS
@@ -97,11 +99,38 @@ GROUP BY
     c.customer_type;
 ```
 
-### Example Output from `VW_DAILY_SALES_ANALYSIS`
+### Output from `VW_DAILY_SALES_ANALYSIS`
 
 ![image](https://github.com/user-attachments/assets/3790b9ac-65e7-4c27-98f7-d76078d67cae)
 
+### 2. Customer behavior
+### 'VW_CUSTOMER_PRODUCT_AFFINITY'
+```  sql
+CREATE OR REPLACE VIEW VW_CUSTOMER_PRODUCT_AFFINITY AS
+SELECT 
+    c.customer_id,
+    c.customer_type,
+    p.product_id,
+    p.name AS product_name,
+    p.category AS product_category,
+    DATE_TRUNC('MONTH', o.transaction_date) AS purchase_month,
+    COUNT(DISTINCT o.transaction_id) AS purchase_count,
+    SUM(o.quantity) AS total_quantity,
+    SUM(o.total_amount) AS total_spent,
+    AVG(o.total_amount) AS avg_purchase_amount,
+    DATEDIFF('DAY', MIN(o.transaction_date), MAX(o.transaction_date)) AS days_between_first_last_purchase
+FROM SILVER.CUSTOMER c
+JOIN SILVER.ORDERS o ON c.customer_id = o.customer_id
+JOIN SILVER.PRODUCT p ON o.product_id = p.product_id
+GROUP BY 
+    c.customer_id,
+    c.customer_type,
+    p.product_id,
+    p.name,
+    p.category,
+    DATE_TRUNC('MONTH', o.transaction_date);
+```
 
-
-
+### Output from `VW_CUSTOMER_PRODUCT_AFFINITY`
+![image](https://github.com/user-attachments/assets/c3b54467-2a95-43cb-9218-73c0adc7cc23)
 
