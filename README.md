@@ -11,3 +11,10 @@ Silver layer table creation:
 ## Data cleaning and standardization using Snowflake SQL Script ##
 
 ![image](https://github.com/user-attachments/assets/9c55f3bd-a022-4264-b915-79bac2f0c9a2)
+
+## Tables before & after data cleaning ##
+
+1. Records with invalid emails:
+
+![image](https://github.com/user-attachments/assets/959311f7-5b34-42d1-8906-fc690e5543cb)
+
