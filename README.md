@@ -82,7 +82,39 @@ SELECT
     END AS validated_total_purchases
 FROM 
     bronze.raw_customers;
+```
 
-#### Data before & after transformations
+### Data before & after transformations
 
 ![image](https://github.com/user-attachments/assets/f7420be1-2b17-48bf-a6be-827e2334c07c)
+
+### Aggregated Query for Gold Layer
+The query aggregates data to analyze daily sales, providing metrics such as total quantity sold, total sales, average price per unit, and average transaction value. Below is the query for the view:
+
+#### `VW_DAILY_SALES_ANALYSIS`
+```sql
+CREATE OR REPLACE VIEW VW_DAILY_SALES_ANALYSIS AS
+SELECT 
+    o.transaction_date,
+    p.product_id,
+    p.name AS product_name,
+    p.category AS product_category,
+    c.customer_id,
+    c.customer_type,
+    SUM(o.quantity) AS total_quantity,
+    SUM(o.total_amount) AS total_sales,
+    COUNT(DISTINCT o.transaction_id) AS num_transactions,
+    SUM(o.total_amount) / NULLIF(SUM(o.quantity), 0) AS avg_price_per_unit,
+    SUM(o.total_amount) / NULLIF(COUNT(DISTINCT o.transaction_id), 0) AS avg_transaction_value
+FROM PACIFIC_RETAIL_DB.SILVER.ORDERS o
+JOIN PACIFIC_RETAIL_DB.SILVER.PRODUCT p ON o.product_id = p.product_id
+JOIN PACIFIC_RETAIL_DB.SILVER.CUSTOMER c ON o.customer_id = c.customer_id
+GROUP BY 
+    o.transaction_date,
+    p.product_id,
+    p.name,
+    p.category,
+    c.customer_id,
+    c.customer_type;
+```
+
