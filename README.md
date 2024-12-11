@@ -22,9 +22,6 @@ Silver layer table creation:
 
 ![image](https://github.com/user-attachments/assets/4d0eac12-822b-4815-93db-06a369b61f58)
 
-## DATA QUALITY CHECKS while loading silver.customer table from bronze.customer :
-
-![image](https://github.com/user-attachments/assets/3d8fdc8a-b79d-4cfe-8654-b64ff4f230f3)
 
 ## Transformations Applied
 ### 1. Customers Table
@@ -37,52 +34,34 @@ Silver layer table creation:
 
 #### SQL Query:
 ```sql
-CREATE OR REPLACE TABLE silver.customers AS
+CREATE OR REPLACE TABLE PACIFIC_RETAIL_DB.SILVER.CUSTOMER AS
 SELECT 
-    customer_id,
-    CASE WHEN email IS NOT NULL THEN email ELSE 'invalid@example.com' END AS validated_email,
+    customer_id, 
+    CUSTOMER_TYPE,
+    email, 
+    CASE 
+        WHEN email IS NULL THEN 'invalid@example.com'  -- Ensure email is not null
+        ELSE email 
+    END AS validated_email,
     CASE 
         WHEN LOWER(customer_type) IN ('regular', 'premium') THEN INITCAP(customer_type)
-        ELSE 'Unknown'
+        ELSE 'Unknown'  -- Normalize customer types to "Regular", "Premium", or "Unknown"
     END AS standardized_customer_type,
     CASE 
-        WHEN age BETWEEN 18 AND 120 THEN age ELSE NULL
+        WHEN age BETWEEN 18 AND 120 THEN age  -- Ensure the age is between 18 and 120
+        ELSE NULL
     END AS verified_age,
     CASE 
         WHEN LOWER(gender) IN ('male', 'female') THEN INITCAP(gender)
-        ELSE 'Other'
+        ELSE 'Other'  -- Classify gender as "Male", "Female", or "Other"
     END AS standardized_gender,
     CASE 
-        WHEN TRY_CAST(total_purchases AS NUMBER) IS NOT NULL THEN total_purchases
+        WHEN TRY_CAST(total_purchases AS NUMBER) IS NOT NULL THEN total_purchases  -- Validate total purchases is numeric
         ELSE 0
     END AS validated_total_purchases
 FROM 
-    bronze.raw_customers;
+    PACIFIC_RETAIL_DB.BRONZE.RAW_CUSTOMER;
 
-#### SQL Query:
-```sql
-CREATE OR REPLACE TABLE silver.customers AS
-SELECT 
-    customer_id,
-    CASE WHEN email IS NOT NULL THEN email ELSE 'invalid@example.com' END AS validated_email,
-    CASE 
-        WHEN LOWER(customer_type) IN ('regular', 'premium') THEN INITCAP(customer_type)
-        ELSE 'Unknown'
-    END AS standardized_customer_type,
-    CASE 
-        WHEN age BETWEEN 18 AND 120 THEN age ELSE NULL
-    END AS verified_age,
-    CASE 
-        WHEN LOWER(gender) IN ('male', 'female') THEN INITCAP(gender)
-        ELSE 'Other'
-    END AS standardized_gender,
-    CASE 
-        WHEN TRY_CAST(total_purchases AS NUMBER) IS NOT NULL THEN total_purchases
-        ELSE 0
-    END AS validated_total_purchases
-FROM 
-    bronze.raw_customers;
-```
 
 ### Data before & after transformations
 
