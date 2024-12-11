@@ -105,8 +105,10 @@ TRANSACTION_DATE	PRODUCT_ID	PRODUCT_NAME	PRODUCT_CATEGORY	CUSTOMER_ID	CUSTOMER_T
 5/22/20	694	Product 694	Toys	658	Regular	9	748.66	1	83.18444444	748.66
 	930	Product 930	Beauty	516	Regular	4	933.78	1	233.445	933.78
 6/24/22	104	Product 104	Home	368	VIP	10	137.28	1	13.728	137.28
-8/19/23	487	Product 487	Garden	535	Regular	7	246.29	1	35.18428571	246.29
-3/18/20	938	Product 938	Food	725	Regular	1	410.03	1	410.03	410.03
-6/27/20	457	Product 457	Beauty	687	VIP	8	269.88	1	33.735	269.88![image](https://github.com/user-attachments/assets/4d935fcf-5fe5-48e3-9f36-00514b1facdd)
+
+![image](https://github.com/user-attachments/assets/3790b9ac-65e7-4c27-98f7-d76078d67cae)
+
+
+
 
 
