@@ -36,11 +36,9 @@ Silver layer table creation:
 - **Total Amount is positive**: Total purchases should add up to a positive value.
 
 ### 3. Product Table
-1. **Price Validation**: Ensures the `price` is a positive number & default to `0` if invalid.
-
-2. **Stock Quantity Validation**: Stocks are always positive.
-
-3. **Rating Validation**:`rating` is within the range of `0` to `5`.
+- **Price Validation**: Ensures the `price` is a positive number & default to `0` if invalid.
+- **Stock Quantity Validation**: Stocks are always positive.
+- **Rating Validation**:`rating` is within the range of `0` to `5`.
 
        
 #### SQL Query:
