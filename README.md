@@ -61,7 +61,7 @@ SELECT
     END AS validated_total_purchases
 FROM 
     PACIFIC_RETAIL_DB.BRONZE.RAW_CUSTOMER;
-
+```
 
 ### Data before & after transformations
 
