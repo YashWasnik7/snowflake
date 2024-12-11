@@ -23,15 +23,26 @@ Silver layer table creation:
 ![image](https://github.com/user-attachments/assets/4d0eac12-822b-4815-93db-06a369b61f58)
 
 
-## Transformations Applied
-### 1. Customers Table
-#### Business Logic:
+## Transformations per Business Logic:
+### 1. Customer Table
 - **Email Validation**: Ensure `email` is not null; default invalid emails to `'invalid@example.com'`.
 - **Customer Type Standardization**: Normalize to `Regular`, `Premium`, or `Unknown`.
 - **Age Verification**: Ensure `age` is between 18 and 120.
 - **Gender Standardization**: Classify gender as `Male`, `Female`, or `Other`.
 - **Total Purchases Validation**: Ensure `total_purchases` is numeric; default invalid values to `0`.
+  
+### 2. Orders Table
+- **Transaction verification**: Non Null `transaction_id`.
+- **Total Amount is positive**: Total purchases should add up to a positive value.
 
+### 3. Product Table
+1. **Price Validation**: Ensures the `price` is a positive number & default to `0` if invalid.
+
+2. **Stock Quantity Validation**: Stocks are always positive.
+
+3. **Rating Validation**:`rating` is within the range of `0` to `5`.
+
+       
 #### SQL Query:
 ```sql
 CREATE OR REPLACE TABLE PACIFIC_RETAIL_DB.SILVER.CUSTOMER AS
