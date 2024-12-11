@@ -7,4 +7,4 @@ Raw layer creation:
 
 Silver layer table creation:
 
-![image](https://github.com/user-attachments/assets/81bc8c92-8f67-4498-a16e-591731f474ad)
+![image](https://github.com/user-attachments/assets/1c017a52-3540-4d08-8b9c-8a407eec8035)
